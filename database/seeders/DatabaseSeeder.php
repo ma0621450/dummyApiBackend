@@ -15,6 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Prevent duplicate seeding
+        if (\App\Models\Brand::count() > 0) {
+            $this->command->info('Database already seeded. Skipping...');
+            return;
+        }
+
         // 1. Create Brands
         $brands = \App\Models\Brand::factory(10)->create();
 
